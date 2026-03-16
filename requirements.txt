@@ -5,3 +5,5 @@ seaborn
 scikit-learn
 streamlit
 openpyxl
+shap
+altair==4.2.2
