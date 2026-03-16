@@ -168,20 +168,16 @@ if predict_btn:
 
     st.subheader("🔎 Model Explanation (SHAP)")
 
-    explainer = shap.TreeExplainer(model)
+# Create SHAP explainer
+explainer = shap.Explainer(model)
 
-    shap_values = explainer.shap_values(input_data)
+# Generate SHAP values for the input
+shap_values = explainer(input_data)
 
-    fig, ax = plt.subplots()
+# Create plot
+fig, ax = plt.subplots()
 
-    shap.plots.waterfall(
-        shap.Explanation(
-            values=shap_values[0],
-            base_values=explainer.expected_value,
-            data=input_data.iloc[0],
-            feature_names=features
-        ),
-        show=False
-    )
+shap.plots.waterfall(shap_values[0], show=False)
 
-    st.pyplot(fig)
+# Display in Streamlit
+st.pyplot(fig)
